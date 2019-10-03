@@ -1,0 +1,27 @@
+version: '2'
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: myop-grafana-dashboard
+    ports:
+      - 80:3000
+    volumes: 
+      - ./data/grafana:/var/lib/grafana
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - graphite
+  graphite:
+    build: .
+    image: myoperator/graphite_statsd
+    container_name: myop-graphite-dashboard
+    ports:
+      - "81:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+    expose: 
+      - 8080
+    volumes:
+      - ./data/graphite:/opt/graphite/storage
