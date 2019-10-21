@@ -3,3 +3,4 @@ logs
 data/
 log/
 .idea/
+*.env
