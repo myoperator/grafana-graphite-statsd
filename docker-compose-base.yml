@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  base:
+    build:
+      context: ./cabot
+      args: 
+        CABOT_VERSION: ${CABOT_VERSION}
+      
+    image: myop/cabot
+    env_file:
+      - cabot/default.env
+      - cabot/${CABOT_ENVIRONMENT}.env
+    restart: always
