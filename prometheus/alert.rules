@@ -1,0 +1,11 @@
+groups:
+- name: login-app
+  rules:
+  - alert: high_login
+    expr: userlogin_events_total > 5
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Server under high load"
+      description: "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."

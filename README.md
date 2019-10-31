@@ -1,4 +1,4 @@
-# StatsD + Graphite + Grafana + Alerting
+# StatsD + Graphite + Grafana + Prometheus + Alertmanager
 
 This image contains a sensible default configuration of StatsD, Graphite, Grafana and Cabot alerting.
 
@@ -7,11 +7,14 @@ This image contains a sensible default configuration of StatsD, Graphite, Grafan
 You should have `docker`, `docker-compose` installed on your machine. The container exposes the following ports:
 
 - `80`: the Grafana web interface.
-- `81`: the Graphite web port
+- `8080`: the Graphite web port
 - `2003`: the Graphite data port
 - `8125`: the StatsD UDP port.
+- `9125`: the StatsD repeater's UDP port.
 - `8126`: the StatsD administrative port.
-- `5000`: Cabot alert webfront
+- `9102`: statsD prometheus metrics
+- `9090`: prometheus metrics
+- `9093`: alertmanager
 
 To start everything, you need to type following command in your terminal:
 
@@ -23,6 +26,14 @@ To start specifically graphite (or grafana), you can type the service names as:
 
 ```sh
 docker-compose up -d grafana
+```
+
+**NOTE** Alerts are not started by default
+
+To start alerting, start the alerting containers
+
+```sh
+docker-compose -f docker-compose-cabot.yml up -d
 ```
 
 This repo also contains a makefile to ease interacting with containers.
@@ -66,7 +77,7 @@ Adding dashboards is easy. All you need to do is:
 
 ## Viewing Alerts
 
-Open `http://localhost:5000` in your browser. It will ask for default credentials for the first timers.
+Open [localhost:5000](http://localhost:5000) in your browser. It will ask for default credentials for the first timers.
 
 ### Configuring graphite with cabot
 
