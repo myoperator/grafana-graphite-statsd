@@ -8,9 +8,9 @@ services:
       - 9125:9125
       - 9125:9125/udp
     command: --statsd.mapping-config=/tmp/statsd_mapping.yml --log.level="debug" --log.format="logger:stdout?json=true"
-    volumes: 
+    volumes:
       - ./statsd/statsd_mapping.yml:/tmp/statsd_mapping.yml
-  
+
   prometheus:
     image: prom/prometheus:v2.12.0
     container_name: prometheus

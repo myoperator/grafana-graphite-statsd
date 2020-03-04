@@ -1,43 +1,71 @@
-version: '2'
+version: '3'
 services:
   grafana:
     image: grafana/grafana
     container_name: myop-grafana-dashboard
     ports:
       - 80:3000
-    volumes: 
+    volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
-    depends_on:
-      - graphite
-  statsd:
-    build: ./statsd
-    container_name: myop-statsd
-    environment: 
-      - GRAPHITE_PORT_2003_TCP_ADDR=graphite
-    ports:
-      - "8125:8125/udp"
-      - "8126:8126"
-  graphite:
-    build: ./graphite
-    image: myoperator/graphite_statsd
-    container_name: myop-graphite-carbon
-    ports:
-      - "8080:80"
-    environment: 
-      - GRAPHITE_STATSD_HOST=statsd
-    expose: 
-      - 8080
-      - "2003-2004"
-      - "2023-2024"
-    volumes:
-      - graphite_data:/opt/graphite/storage
-      - ./log/graphite:/var/log/graphite
-    depends_on:
-      - statsd
+    networks:
+      - monitoring
 
+  statsd-exporter:
+    image: prom/statsd-exporter
+    ports:
+      - 9102:9102
+      - 9125:9125
+      - 9125:9125/udp
+    command: --statsd.mapping-config=/tmp/statsd_mapping.yml --log.level="debug"
+
+    volumes:
+      - ./statsd/statsd_mapping.yml:/tmp/statsd_mapping.yml
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    labels:
+      org.label-schema.group: "monitoring"
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    restart: unless-stopped
+    ports:
+      - 9093:9093
+    labels:
+      org.label-schema.group: "monitoring"
+    networks:
+      - monitoring
 
 volumes:
     grafana_data: {}
-    graphite_data: {}
+    prometheus_data: {}
+
+networks:
+    monitoring:
+        external: true

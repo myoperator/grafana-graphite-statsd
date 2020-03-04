@@ -9,9 +9,7 @@ You should have `docker`, `docker-compose` installed on your machine. The contai
 - `80`: the Grafana web interface.
 - `8080`: the Graphite web port
 - `2003`: the Graphite data port
-- `8125`: the StatsD UDP port.
 - `9125`: the StatsD repeater's UDP port.
-- `8126`: the StatsD administrative port.
 - `9102`: statsD prometheus metrics
 - `9090`: prometheus metrics
 - `9093`: alertmanager

@@ -2,8 +2,6 @@ FROM statsd/statsd
 
 ADD ./config.js /usr/src/app/config.js
 
-ENV GRAPHITE_GLOBAL_PREFIX stats
-ENV GRAPHITE_LEGACY_NAMESPACE true
 
 ENV STATSD_PORT 8125
 ENV STATSD_DUMP_MSG true
