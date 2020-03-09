@@ -65,3 +65,18 @@ mappings:
       service_name: "$1"
       service_address: "$2"
       exception_class: "$3"
+
+ - match: "myoperator_function_duration_ms.*.*.*"
+   timer_type: histogram
+   name: "myoperator_function_duration_ms"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      status: "$3"
+
+ - match: "myoperator_function_exception_type.*.*.*"
+   name: "myoperator_function_exception_type"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      exception_class: "$3"
