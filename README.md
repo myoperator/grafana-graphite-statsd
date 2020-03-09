@@ -2,6 +2,10 @@
 
 This image contains a sensible default configuration of StatsD, Graphite, Grafana and Cabot alerting.
 
+## Grafana Dashboard
+
+Grafana dashboards are present in the grafana_dashboards folder as json files.
+
 ## Getting Started
 
 You should have `docker`, `docker-compose` installed on your machine. The container exposes the following ports:
