@@ -4,7 +4,7 @@ services:
     image: grafana/grafana
     container_name: myop-grafana-dashboard
     ports:
-      - 80:3000
+            - ${GRAFANA_PORT:-3000}:3000
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
@@ -15,9 +15,9 @@ services:
   statsd-exporter:
     image: prom/statsd-exporter
     ports:
-      - 9102:9102
-      - 9125:9125
-      - 9125:9125/udp
+      - ${STATSD_PORT_WEB:-9102}:9102
+      - ${STATSD_PORT_TCP:-9125}:9125
+      - ${STATSD_PORT_UDP:-9125}:9125/udp
     command: --statsd.mapping-config=/tmp/statsd_mapping.yml --log.level="debug"
 
     volumes:
@@ -40,7 +40,7 @@ services:
       - '--web.enable-lifecycle'
     restart: unless-stopped
     ports:
-      - 9090:9090
+      - ${PROMETHEUS_PORT:-9090}:9090
     labels:
       org.label-schema.group: "monitoring"
     networks:
@@ -56,7 +56,7 @@ services:
       - '--storage.path=/alertmanager'
     restart: unless-stopped
     ports:
-      - 9093:9093
+      - ${ALERTMANAGER_PORT:-9093}:9093
     labels:
       org.label-schema.group: "monitoring"
     networks:
@@ -67,5 +67,4 @@ volumes:
     prometheus_data: {}
 
 networks:
-    monitoring:
-        external: true
+    monitoring: {}
