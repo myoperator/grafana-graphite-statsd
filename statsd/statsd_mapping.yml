@@ -32,6 +32,12 @@ mappings:
       io_type: "$1"
       io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
 
+ - match: "myoperator_external_io_duration_ms_total.*.*.*"
+   name: "myoperator_external_io_duration_ms_total"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      status: "$3"
 
  - match: "myoperator_io_count.*.*" # count of requests made during io
    name: "myoperator_io_count"
@@ -69,6 +75,13 @@ mappings:
  - match: "myoperator_function_duration_ms.*.*.*"
    timer_type: histogram
    name: "myoperator_function_duration_ms"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      status: "$3"
+
+ - match: "myoperator_function_duration_ms_total.*.*.*"
+   name: "myoperator_function_duration_ms_total"
    labels:
       function_name: "$1"
       host: "$2"
@@ -127,6 +140,13 @@ mappings:
       service_address: "$2"
       status: "$3"
 
+ - match: "callback_api_external_io_duration_ms_total.*.*.*"
+   name: "callback_api_external_io_duration_ms_total"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      status: "$3"
+
  - match: "callback_api_external_io_total.*.*.*"
    name: "callback_api_external_io_total"
    labels:
@@ -144,6 +164,13 @@ mappings:
  - match: "callback_api_function_duration_ms.*.*.*"
    timer_type: histogram
    name: "callback_api_function_duration_ms"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      status: "$3"
+
+ - match: "callback_api_function_duration_ms_total.*.*.*"
+   name: "callback_api_function_duration_ms_total"
    labels:
       function_name: "$1"
       host: "$2"
