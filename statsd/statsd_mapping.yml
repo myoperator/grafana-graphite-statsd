@@ -182,3 +182,93 @@ mappings:
       function_name: "$1"
       host: "$2"
       exception_class: "$3"
+
+
+# metric for obd wrapper
+
+ - match: "obd_wrapper_http_requests_total.*"
+   name: "obd_wrapper_http_requests_total"
+   labels:
+      status_code: "$1"
+
+ - match: "obd_wrapper_http_requests_duration_ms.*"
+   timer_type: histogram
+   name: "obd_wrapper_http_requests_duration_ms"
+   labels:
+      status_code: "$1"
+
+ - match: "obd_wrapper_http_requests_exception_type.*"
+   name: "obd_wrapper_http_requests_exception_type"
+   labels:
+       exception_class: "$1"
+
+
+ - match: "obd_wrapper_io_duration_ms.*.*"
+   timer_type: histogram
+   name: "obd_wrapper_io_duration_ms"
+   labels:
+      io_type: "$1"
+      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
+
+
+ - match: "obd_wrapper_io_count.*.*" # count of requests made during io
+   name: "obd_wrapper_io_count"
+   labels:
+      io_type: "$1"
+      io_name: "$2"
+
+ - match: "obd_wrapper_http_requests_duration_ms_total.*"
+   name: "obd_wrapper_http_requests_duration_ms_total"
+   labels:
+      status_code: "$1"
+
+ - match: "obd_wrapper_external_io_duration_ms.*.*.*"
+   timer_type: histogram
+   name: "obd_wrapper_external_io_duration_ms"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      status: "$3"
+
+ - match: "obd_wrapper_external_io_duration_ms_total.*.*.*"
+   name: "obd_wrapper_external_io_duration_ms_total"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      status: "$3"
+
+ - match: "obd_wrapper_external_io_total.*.*.*"
+   name: "obd_wrapper_external_io_total"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      address: "$3"
+
+ - match: "obd_wrapper_external_io_exception_type.*.*.*"
+   name: "obd_wrapper_external_io_exception_type"
+   labels:
+      service_name: "$1"
+      service_address: "$2"
+      exception_class: "$3"
+
+ - match: "obd_wrapper_function_duration_ms.*.*.*"
+   timer_type: histogram
+   name: "obd_wrapper_function_duration_ms"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      status: "$3"
+
+ - match: "obd_wrapper_function_duration_ms_total.*.*.*"
+   name: "obd_wrapper_function_duration_ms_total"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      status: "$3"
+
+ - match: "obd_wrapper_function_exception_type.*.*.*"
+   name: "obd_wrapper_function_exception_type"
+   labels:
+      function_name: "$1"
+      host: "$2"
+      exception_class: "$3"
