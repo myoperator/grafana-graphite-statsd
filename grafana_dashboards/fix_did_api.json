@@ -60,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(redis_sync_external_io_exception_type[2m]))",
+          "expr": "sum by (service_name)(rate(fix_did_external_io_exception_type[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -148,7 +148,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(redis_sync_http_requests_exception_type[2m]))",
+          "expr": "sum(rate(fix_did_http_requests_exception_type[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -236,7 +236,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(redis_sync_external_io_duration_ms_count[2m]))",
+          "expr": "sum by (service_name)(rate(fix_did_external_io_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -283,7 +283,7 @@
     },
     {
       "aliasColors": {
-        "sum(rate(redis_sync_http_requests_duration_ms_bucket[2m]))": "blue"
+        "sum(rate(fix_did_http_requests_duration_ms_bucket[2m]))": "blue"
       },
       "bars": false,
       "dashLength": 10,
@@ -325,7 +325,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(redis_sync_http_requests_total[2m]))",
+          "expr": "sum(rate(fix_did_http_requests_total[2m]))",
           "refId": "A"
         }
       ],
@@ -414,7 +414,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name, status)(rate(redis_sync_external_io_duration_ms_sum[2m]))\n /\nsum by (service_name, status)(rate(redis_sync_external_io_duration_ms_count[2m]))",
+          "expr": "sum by (service_name, status)(rate(fix_did_external_io_duration_ms_sum[2m]))\n /\nsum by (service_name, status)(rate(fix_did_external_io_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -461,7 +461,7 @@
     },
     {
       "aliasColors": {
-        "sum(rate(redis_sync_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(redis_sync_http_requests_duration_ms_count[2m]))": "rgb(219, 128, 21)"
+        "sum(rate(fix_did_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(fix_did_http_requests_duration_ms_count[2m]))": "rgb(219, 128, 21)"
       },
       "bars": false,
       "dashLength": 10,
@@ -503,7 +503,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(redis_sync_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(redis_sync_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(fix_did_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(fix_did_http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -550,7 +550,7 @@
     },
     {
       "aliasColors": {
-        "sum(irate(redis_sync_http_requests_duration_ms_sum{status_code='5xx'}[2m]))\n /\nsum(irate(redis_sync_http_requests_duration_ms_count{status_code='5xx'}[2m]))": "dark-blue"
+        "sum(irate(fix_did_http_requests_duration_ms_sum{status_code='5xx'}[2m]))\n /\nsum(irate(fix_did_http_requests_duration_ms_count{status_code='5xx'}[2m]))": "dark-blue"
       },
       "bars": false,
       "dashLength": 10,
@@ -592,7 +592,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (status_code)(irate(redis_sync_http_requests_duration_ms_sum[2m]))\n /\nsum by (status_code)(irate(redis_sync_http_requests_duration_ms_count[2m]))",
+          "expr": "sum by (status_code)(irate(fix_did_http_requests_duration_ms_sum[2m]))\n /\nsum by (status_code)(irate(fix_did_http_requests_duration_ms_count[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -681,7 +681,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(redis_sync_http_requests_duration_ms_bucket[2m]))",
+          "expr": "sum by (le)(rate(fix_did_http_requests_duration_ms_bucket[2m]))",
           "refId": "A"
         }
       ],
@@ -728,7 +728,7 @@
     },
     {
       "aliasColors": {
-        "sum(rate(redis_sync_http_requests_duration_ms_bucket{status_code='5xx'}[2m]))": "dark-red"
+        "sum(rate(fix_did_http_requests_duration_ms_bucket{status_code='5xx'}[2m]))": "dark-red"
       },
       "bars": false,
       "dashLength": 10,
@@ -773,7 +773,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(redis_sync_http_requests_duration_ms_count{status_code='5xx'}[2m]))",
+          "expr": "sum(rate(fix_did_http_requests_duration_ms_count{status_code='5xx'}[2m]))",
           "refId": "A"
         }
       ],
@@ -859,7 +859,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(redis_sync_external_io_duration_ms_bucket[2m]))",
+          "expr": "sum by (le)(rate(fix_did_external_io_duration_ms_bucket[2m]))",
           "refId": "A"
         }
       ],
@@ -946,7 +946,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "redis_sync_http_requests_duration_ms_total",
+          "expr": "fix_did_http_requests_duration_ms_total",
           "refId": "A"
         }
       ],
@@ -993,7 +993,7 @@
     },
     {
       "aliasColors": {
-        "sum(rate(redis_sync_http_requests_duration_ms_bucket{le=\"0.5\"}[2m]))\n/\n  sum(rate(redis_sync_http_requests_duration_ms_count[2m]))": "purple"
+        "sum(rate(fix_did_http_requests_duration_ms_bucket{le=\"0.5\"}[2m]))\n/\n  sum(rate(fix_did_http_requests_duration_ms_count[2m]))": "purple"
       },
       "bars": false,
       "dashLength": 10,
@@ -1035,7 +1035,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(redis_sync_http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(redis_sync_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(fix_did_http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(fix_did_http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -1116,7 +1116,7 @@
     ]
   },
   "timezone": "",
-  "title": "Redis Sync API dashboard",
-  "uid": "WJS73vuZa",
+  "title": "FIX DID API dashboard",
+  "uid": "AJS73vuZa",
   "version": 1
 }
