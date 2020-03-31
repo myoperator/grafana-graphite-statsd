@@ -94,6 +94,10 @@ mappings:
       host: "$2"
       exception_class: "$3"
 
+ - match: "myoperator_bytes_size.*"
+   name: "myoperator_bytes_size"
+   labels:
+      name: "$1"
  #- metrics for callback api
 
  - match: "callback_api_http_requests_total.*"
@@ -361,6 +365,11 @@ mappings:
       function_name: "$1"
       host: "$2"
       exception_class: "$3"
+
+ - match: "redis_sync_bytes_size.*"
+   name: "redis_sync_bytes_size"
+   labels:
+      name: "$1"
 
 # metric for fix did  sync code/api
 
