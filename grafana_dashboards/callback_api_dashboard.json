@@ -650,7 +650,7 @@
     },
     {
       "aliasColors": {
-        "sum(rate(myoperator_http_requests_duration_ms_bucket{status_code='5xx'}[2m]))": "dark-red"
+        "sum by (status_code)(rate(myoperator_http_requests_duration_ms_bucket[2m]))": "dark-red"
       },
       "bars": false,
       "dashLength": 10,
@@ -695,7 +695,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(engine_api_http_requests_duration_ms_count{status_code='5xx'}[2m]))",
+          "expr": "sum by (status_code)(rate(engine_api_http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -703,7 +703,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Error rate (500 status code)",
+      "title": "Error rate by status codes",
       "tooltip": {
         "shared": true,
         "sort": 0,
