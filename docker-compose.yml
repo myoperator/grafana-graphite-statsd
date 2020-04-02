@@ -6,7 +6,7 @@ services:
     ports:
             - ${GRAFANA_PORT:-3000}:3000
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ./grafana_dashboards:/var/lib/grafana/dashboards
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
     networks:
