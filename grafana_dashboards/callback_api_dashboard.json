@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:54",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,7 +16,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
   "links": [],
   "panels": [
     {
@@ -33,28 +33,34 @@
             "mean"
           ],
           "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
+          "overrides": [],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.7.1",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(engine_api_external_io_exception_type[2m]))",
@@ -64,7 +70,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "External IO Exception Rate(No of exceptions / sec)",
+      "title": "External Service Exception Rate(No of exceptions / sec)",
       "type": "gauge"
     },
     {
@@ -75,45 +81,53 @@
         "x": 6,
         "y": 0
       },
-      "id": 23,
+      "id": 25,
       "options": {
         "fieldOptions": {
           "calcs": [
             "mean"
           ],
           "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
+          "overrides": [],
           "values": false
         },
         "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.7.1",
       "targets": [
         {
-          "expr": "sum(rate(engine_api_http_requests_exception_type[2m]))",
+          "expr": "sum by (service_name)(rate(engine_api_http_requests_exception_type[2m]))",
           "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "External IO Exception Rate(No of exceptions / sec)",
+      "title": "Http Requests Exception Rate(No of exceptions / sec)",
       "type": "gauge"
     },
     {
@@ -204,32 +218,29 @@
       }
     },
     {
-      "aliasColors": {
-        "sum(rate(myoperator_http_requests_duration_ms_bucket[2m]))": "blue"
-      },
+      "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fill": 4,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 6,
         "x": 0,
         "y": 8
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 24,
       "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
         "show": true,
         "total": false,
-        "values": true
+        "values": false
       },
       "lines": true,
       "linewidth": 1,
@@ -238,6 +249,7 @@
         "dataLinks": []
       },
       "percentage": false,
+      "pluginVersion": "6.7.1",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -247,7 +259,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(engine_api_http_requests_total[2m]))",
+          "expr": "sum(rate(engine_api_external_io_exception_type[2m]))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -255,13 +270,12 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Request Rate",
+      "title": "External IO Exception Rate(No of exceptions / sec)",
       "tooltip": {
         "shared": true,
         "sort": 0,
         "value_type": "individual"
       },
-      "transparent": true,
       "type": "graph",
       "xaxis": {
         "buckets": null,
@@ -272,15 +286,108 @@
       },
       "yaxes": [
         {
-          "decimals": null,
-          "format": "locale",
-          "label": "Requests per second",
+          "$$hashKey": "object:333",
+          "format": "short",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
+          "$$hashKey": "object:334",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 23,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.7.1",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(engine_api_http_requests_exception_type[2m]))",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Http Exception Rate(No of exceptions / sec)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:161",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:162",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -383,22 +490,22 @@
     },
     {
       "aliasColors": {
-        "sum(rate(myoperator_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(myoperator_http_requests_duration_ms_count[2m]))": "rgb(219, 128, 21)"
+        "sum(rate(myoperator_http_requests_duration_ms_bucket[2m]))": "blue"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fill": 1,
+      "fill": 4,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 6,
         "x": 0,
         "y": 16
       },
       "hiddenSeries": false,
-      "id": 4,
+      "id": 2,
       "legend": {
         "alignAsTable": true,
         "avg": true,
@@ -406,7 +513,7 @@
         "max": true,
         "min": true,
         "show": true,
-        "total": true,
+        "total": false,
         "values": true
       },
       "lines": true,
@@ -425,7 +532,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(engine_api_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(engine_api_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(engine_api_http_requests_total[2m]))",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -433,7 +542,97 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Average Response Time ",
+      "title": "Request Rate",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "locale",
+          "label": "Requests per second",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 27,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "engine_api_http_requests_total",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Request Counter",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -449,7 +648,7 @@
       },
       "yaxes": [
         {
-          "format": "s",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -562,13 +761,13 @@
     },
     {
       "aliasColors": {
-        "{le=\"0.025\"}": "dark-green"
+        "sum(rate(myoperator_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(myoperator_http_requests_duration_ms_count[2m]))": "rgb(219, 128, 21)"
       },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
@@ -577,18 +776,19 @@
         "y": 24
       },
       "hiddenSeries": false,
-      "id": 10,
+      "id": 4,
       "legend": {
+        "alignAsTable": true,
         "avg": true,
         "current": true,
         "max": true,
         "min": true,
         "show": true,
-        "total": false,
+        "total": true,
         "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -603,7 +803,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(engine_api_http_requests_duration_ms_bucket[2m]))",
+          "expr": "sum(rate(engine_api_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(engine_api_http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -611,7 +811,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Response time distribution",
+      "title": "Average Response Time ",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -627,8 +827,8 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "label": "Requests per sec",
+          "format": "s",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": null,
@@ -741,7 +941,9 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "{le=\"0.025\"}": "dark-green"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -755,18 +957,18 @@
         "y": 32
       },
       "hiddenSeries": false,
-      "id": 18,
+      "id": 10,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
@@ -781,7 +983,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(engine_api_external_io_duration_ms_bucket[2m]))",
+          "expr": "sum by (le)(rate(engine_api_http_requests_duration_ms_bucket[2m]))",
           "refId": "A"
         }
       ],
@@ -789,7 +991,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "External IO distribution",
+      "title": "Response time distribution",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -805,8 +1007,8 @@
       },
       "yaxes": [
         {
-          "format": "none",
-          "label": null,
+          "format": "short",
+          "label": "Requests per sec",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -914,6 +1116,92 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "hiddenSeries": false,
+      "id": 18,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (le)(rate(engine_api_external_io_duration_ms_bucket[2m]))",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "External IO distribution",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "aliasColors": {
         "sum(rate(myoperator_http_requests_duration_ms_bucket{le=\"0.5\"}[2m]))\n/\n  sum(rate(myoperator_http_requests_duration_ms_count[2m]))": "purple"
       },
@@ -927,7 +1215,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 40
+        "y": 48
       },
       "hiddenSeries": false,
       "id": 8,
@@ -957,12 +1245,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(engine_api_http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(engine_api_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(engine_api_http_requests_duration_ms_bucket{le=\"0.5\"}[2m]))\n/\n  sum(rate(engine_api_http_requests_duration_ms_count[2m]))",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
       "thresholds": [
         {
+          "$$hashKey": "object:440",
           "colorMode": "critical",
           "fill": false,
           "line": true,
@@ -990,14 +1281,16 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:412",
           "format": "short",
           "label": "Fraction of requests rate in 500 ms bucket",
           "logBase": 1,
           "max": "1",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
+          "$$hashKey": "object:413",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1013,14 +1306,14 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1040,5 +1333,8 @@
   "timezone": "",
   "title": "Callback API dashboatrd",
   "uid": "WJS73vuZzCallback",
+  "variables": {
+    "list": []
+  },
   "version": 2
 }
