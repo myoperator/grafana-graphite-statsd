@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
   "links": [],
   "panels": [
     {
@@ -325,7 +324,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_total[2m]))",
+          "expr": "sum(rate(http_requests_total{app_name=\"[[$apps]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -503,7 +502,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_duration_ms_sum[2m]))\n /\nsum(rate(http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_sum{app_name=\"[[apps]]\"}[2m]))\n /\nsum(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -773,7 +772,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_duration_ms_count{status_code='5xx'}[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -1035,7 +1034,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_bucket{le=\"1\"}[2m]))\n/\n  sum(rate(http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -1095,10 +1094,43 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "obd_wrapper",
+          "value": "obd_wrapper"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(app_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "apps",
+        "options": [
+          {
+            "selected": true,
+            "text": "obd_wrapper",
+            "value": "obd_wrapper"
+          }
+        ],
+        "query": "label_values(app_name)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1118,5 +1150,5 @@
   "timezone": "",
   "title": "Obd Wrapper API dashboard",
   "uid": "WJS73vuZz",
-  "version": 4
+  "version": 7
 }
