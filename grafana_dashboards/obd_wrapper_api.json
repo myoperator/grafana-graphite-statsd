@@ -60,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(obd_wrapper_external_io_exception_type[2m]))",
+          "expr": "sum by (service_name)(rate(external_io_exception_type[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -148,7 +148,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(obd_wrapper_http_requests_exception_type[2m]))",
+          "expr": "sum(rate(http_requests_exception_type[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -236,7 +236,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(obd_wrapper_external_io_duration_ms_count[2m]))",
+          "expr": "sum by (service_name)(rate(external_io_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -325,7 +325,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(obd_wrapper_http_requests_total[2m]))",
+          "expr": "sum(rate(http_requests_total[2m]))",
           "refId": "A"
         }
       ],
@@ -414,7 +414,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name, status)(rate(obd_wrapper_external_io_duration_ms_sum[2m]))\n /\nsum by (service_name, status)(rate(obd_wrapper_external_io_duration_ms_count[2m]))",
+          "expr": "sum by (service_name, status)(rate(external_io_duration_ms_sum[2m]))\n /\nsum by (service_name, status)(rate(external_io_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -503,7 +503,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(obd_wrapper_http_requests_duration_ms_sum[2m]))\n /\nsum(rate(obd_wrapper_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_sum[2m]))\n /\nsum(rate(http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],
@@ -592,7 +592,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (status_code)(irate(obd_wrapper_http_requests_duration_ms_sum[2m]))\n /\nsum by (status_code)(irate(obd_wrapper_http_requests_duration_ms_count[2m]))",
+          "expr": "sum by (status_code)(irate(http_requests_duration_ms_sum[2m]))\n /\nsum by (status_code)(irate(http_requests_duration_ms_count[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -681,7 +681,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(obd_wrapper_http_requests_duration_ms_bucket[2m]))",
+          "expr": "sum by (le)(rate(http_requests_duration_ms_bucket[2m]))",
           "refId": "A"
         }
       ],
@@ -773,7 +773,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(obd_wrapper_http_requests_duration_ms_count{status_code='5xx'}[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_count{status_code='5xx'}[2m]))",
           "refId": "A"
         }
       ],
@@ -859,7 +859,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(obd_wrapper_external_io_duration_ms_bucket[2m]))",
+          "expr": "sum by (le)(rate(external_io_duration_ms_bucket[2m]))",
           "refId": "A"
         }
       ],
@@ -946,7 +946,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "obd_wrapper_http_requests_duration_ms_total",
+          "expr": "http_requests_duration_ms_total",
           "refId": "A"
         }
       ],
@@ -1035,7 +1035,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(obd_wrapper_http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(obd_wrapper_http_requests_duration_ms_count[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_bucket{le=\"0.05\"}[2m]))\n/\n  sum(rate(http_requests_duration_ms_count[2m]))",
           "refId": "A"
         }
       ],

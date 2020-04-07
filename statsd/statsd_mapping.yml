@@ -1,461 +1,78 @@
+
 mappings:
     # negative lookahead
     #- match: "^appmetric\.((?!timing).)*$"
-    #- match: '^appmetric\.(\w+)\.([^/http|network|exception].*)\.(\w+)\.(\w+)*$'
+    #- match: '^appmetric\.(\w+)\.([^/http|network|exception])\.(\w+)\.(\w+)*$'
 
     # usage: appmetrics.memcacheapi.timer.http.memcache/get
     # for http timing requests
     # mappings:
     #
   ## Latency Metrics
- - match: "myoperator_http_requests_total.*"
-   name: "myoperator_http_requests_total"
+ - match: "http_requests_total.*"
+   name: "http_requests_total"
    labels:
-      status_code: "$1"
+       app_name: "$1"
 
- - match: "myoperator_http_requests_duration_ms.*"
+ - match: "http_requests_duration_ms.*"
    timer_type: histogram
-   name: "myoperator_http_requests_duration_ms"
+   name: "http_requests_duration_ms"
    labels:
-      status_code: "$1"
+       app_name: "$1"
 
- - match: "myoperator_http_requests_exception_type.*"
-   name: "myoperator_http_requests_exception_type"
+ - match: "http_requests_exception_type.*"
+   name: "http_requests_exception_type"
    labels:
-       exception_class: "$1"
+       app_name: "$1"
 
+ - match: "external_io_duration_total_ms.*"
+   name: "external_io_duration_ms_total"
+   labels:
+       app_name: "$1"
 
- - match: "myoperator_io_duration_ms.*.*"
+ - match: "io_count.*" # count of requests made during io
+   name: "io_count"
+   labels:
+       app_name: "$1"
+
+ - match: "http_requests_duration_total_ms.*"
+   name: "http_requests_duration_ms_total"
+   labels:
+       app_name: "$1"
+
+ - match: "external_io_duration_ms.*"
    timer_type: histogram
-   name: "myoperator_io_duration_ms"
+   name: "external_io_duration_ms"
    labels:
-      io_type: "$1"
-      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
+       app_name: "$1"
 
- - match: "myoperator_external_io_duration_ms_total.*.*.*"
-   name: "myoperator_external_io_duration_ms_total"
+ - match: "external_io_total.*"
+   name: "external_io_total"
    labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
+       app_name: "$1"
 
- - match: "myoperator_io_count.*.*" # count of requests made during io
-   name: "myoperator_io_count"
+ - match: "external_io_exception_type.*"
+   name: "external_io_exception_type"
    labels:
-      io_type: "$1"
-      io_name: "$2"
+       app_name: "$1"
 
- - match: "myoperator_http_requests_duration_ms_total.*"
-   name: "myoperator_http_requests_duration_ms_total"
-   labels:
-      status_code: "$1"
-
- - match: "myoperator_external_io_duration_ms.*.*.*"
+ - match: "function_duration_ms.*"
    timer_type: histogram
-   name: "myoperator_external_io_duration_ms"
+   name: "function_duration_ms"
    labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
+       app_name: "$1"
 
- - match: "myoperator_external_io_total.*.*.*"
-   name: "myoperator_external_io_total"
+ - match: "function_duration_total_ms.*"
+   name: "function_duration_ms_total"
    labels:
-      service_name: "$1"
-      service_address: "$2"
-      address: "$3"
+       app_name: "$1"
 
- - match: "myoperator_external_io_exception_type.*.*.*"
-   name: "myoperator_external_io_exception_type"
+ - match: "function_exception_type.*"
+   name: "function_exception_type"
    labels:
-      service_name: "$1"
-      service_address: "$2"
-      exception_class: "$3"
+       app_name: "$1"
 
- - match: "myoperator_function_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "myoperator_function_duration_ms"
+ - match: "bytes_size.*"
+   name: "bytes_size"
    labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "myoperator_function_duration_ms_total.*.*.*"
-   name: "myoperator_function_duration_ms_total"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "myoperator_function_exception_type.*.*.*"
-   name: "myoperator_function_exception_type"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      exception_class: "$3"
-
- - match: "myoperator_bytes_size.*"
-   name: "myoperator_bytes_size"
-   labels:
-      name: "$1"
- #- metrics for callback api
-
- - match: "engine_api_http_requests_total.*"
-   name: "engine_api_http_requests_total"
-   labels:
-      status_code: "$1"
-
- - match: "engine_api_http_requests_duration_ms.*"
-   timer_type: histogram
-   name: "engine_api_http_requests_duration_ms"
-   labels:
-      status_code: "$1"
-
- - match: "engine_api_http_requests_exception_type.*"
-   name: "engine_api_http_requests_exception_type"
-   labels:
-       exception_class: "$1"
-
-
- - match: "engine_api_io_duration_ms.*.*"
-   timer_type: histogram
-   name: "engine_api_io_duration_ms"
-   labels:
-      io_type: "$1"
-      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
-
-
- - match: "engine_api_io_count.*.*" # count of requests made during io
-   name: "engine_api_io_count"
-   labels:
-      io_type: "$1"
-      io_name: "$2"
-
- - match: "engine_api_http_requests_duration_ms_total.*"
-   name: "engine_api_http_requests_duration_ms_total"
-   labels:
-      status_code: "$1"
-
- - match: "engine_api_external_io_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "engine_api_external_io_duration_ms"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "engine_api_external_io_duration_ms_total.*.*.*"
-   name: "engine_api_external_io_duration_ms_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "engine_api_external_io_total.*.*.*"
-   name: "engine_api_external_io_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      address: "$3"
-
- - match: "engine_api_external_io_exception_type.*.*.*"
-   name: "engine_api_external_io_exception_type"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      exception_class: "$3"
-
- - match: "engine_api_function_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "engine_api_function_duration_ms"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "engine_api_function_duration_ms_total.*.*.*"
-   name: "engine_api_function_duration_ms_total"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "engine_api_function_exception_type.*.*.*"
-   name: "engine_api_function_exception_type"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      exception_class: "$3"
-
-
-# metric for obd wrapper
-
- - match: "obd_wrapper_http_requests_total.*"
-   name: "obd_wrapper_http_requests_total"
-   labels:
-      status_code: "$1"
-
- - match: "obd_wrapper_http_requests_duration_ms.*"
-   timer_type: histogram
-   name: "obd_wrapper_http_requests_duration_ms"
-   labels:
-      status_code: "$1"
-
- - match: "obd_wrapper_http_requests_exception_type.*"
-   name: "obd_wrapper_http_requests_exception_type"
-   labels:
-       exception_class: "$1"
-
-
- - match: "obd_wrapper_io_duration_ms.*.*"
-   timer_type: histogram
-   name: "obd_wrapper_io_duration_ms"
-   labels:
-      io_type: "$1"
-      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
-
-
- - match: "obd_wrapper_io_count.*.*" # count of requests made during io
-   name: "obd_wrapper_io_count"
-   labels:
-      io_type: "$1"
-      io_name: "$2"
-
- - match: "obd_wrapper_http_requests_duration_ms_total.*"
-   name: "obd_wrapper_http_requests_duration_ms_total"
-   labels:
-      status_code: "$1"
-
- - match: "obd_wrapper_external_io_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "obd_wrapper_external_io_duration_ms"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "obd_wrapper_external_io_duration_ms_total.*.*.*"
-   name: "obd_wrapper_external_io_duration_ms_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "obd_wrapper_external_io_total.*.*.*"
-   name: "obd_wrapper_external_io_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      address: "$3"
-
- - match: "obd_wrapper_external_io_exception_type.*.*.*"
-   name: "obd_wrapper_external_io_exception_type"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      exception_class: "$3"
-
- - match: "obd_wrapper_function_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "obd_wrapper_function_duration_ms"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "obd_wrapper_function_duration_ms_total.*.*.*"
-   name: "obd_wrapper_function_duration_ms_total"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "obd_wrapper_function_exception_type.*.*.*"
-   name: "obd_wrapper_function_exception_type"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      exception_class: "$3"
-
-# metric for redis sync code/api
-
- - match: "redis_sync_http_requests_total.*"
-   name: "redis_sync_http_requests_total"
-   labels:
-      status_code: "$1"
-
- - match: "redis_sync_http_requests_duration_ms.*"
-   timer_type: histogram
-   name: "redis_sync_http_requests_duration_ms"
-   labels:
-      status_code: "$1"
-
- - match: "redis_sync_http_requests_exception_type.*"
-   name: "redis_sync_http_requests_exception_type"
-   labels:
-       exception_class: "$1"
-
-
- - match: "redis_sync_io_duration_ms.*.*"
-   timer_type: histogram
-   name: "redis_sync_io_duration_ms"
-   labels:
-      io_type: "$1"
-      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
-
-
- - match: "redis_sync_io_count.*.*" # count of requests made during io
-   name: "redis_sync_io_count"
-   labels:
-      io_type: "$1"
-      io_name: "$2"
-
- - match: "redis_sync_http_requests_duration_ms_total.*"
-   name: "redis_sync_http_requests_duration_ms_total"
-   labels:
-      status_code: "$1"
-
- - match: "redis_sync_external_io_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "redis_sync_external_io_duration_ms"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "redis_sync_external_io_duration_ms_total.*.*.*"
-   name: "redis_sync_external_io_duration_ms_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "redis_sync_external_io_total.*.*.*"
-   name: "redis_sync_external_io_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      address: "$3"
-
- - match: "redis_sync_external_io_exception_type.*.*.*"
-   name: "redis_sync_external_io_exception_type"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      exception_class: "$3"
-
- - match: "redis_sync_function_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "redis_sync_function_duration_ms"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "redis_sync_function_duration_ms_total.*.*.*"
-   name: "redis_sync_function_duration_ms_total"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "redis_sync_function_exception_type.*.*.*"
-   name: "redis_sync_function_exception_type"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      exception_class: "$3"
-
- - match: "redis_sync_bytes_size.*"
-   name: "redis_sync_bytes_size"
-   labels:
-      name: "$1"
-
-# metric for fix did  sync code/api
-
- - match: "fix_did_http_requests_total.*"
-   name: "fix_did_http_requests_total"
-   labels:
-      status_code: "$1"
-
- - match: "fix_did_http_requests_duration_ms.*"
-   timer_type: histogram
-   name: "fix_did_http_requests_duration_ms"
-   labels:
-      status_code: "$1"
-
- - match: "fix_did_http_requests_exception_type.*"
-   name: "fix_did_http_requests_exception_type"
-   labels:
-       exception_class: "$1"
-
-
- - match: "fix_did_io_duration_ms.*.*"
-   timer_type: histogram
-   name: "fix_did_io_duration_ms"
-   labels:
-      io_type: "$1"
-      io_name: "$2" # e.g sqldb, mongodb, dynamodb, elasticsearch
-
-
- - match: "fix_did_io_count.*.*" # count of requests made during io
-   name: "fix_did_io_count"
-   labels:
-      io_type: "$1"
-      io_name: "$2"
-
- - match: "fix_did_http_requests_duration_ms_total.*"
-   name: "fix_did_http_requests_duration_ms_total"
-   labels:
-      status_code: "$1"
-
- - match: "fix_did_external_io_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "fix_did_external_io_duration_ms"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "fix_did_external_io_duration_ms_total.*.*.*"
-   name: "fix_did_external_io_duration_ms_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      status: "$3"
-
- - match: "fix_did_external_io_total.*.*.*"
-   name: "fix_did_external_io_total"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      address: "$3"
-
- - match: "fix_did_external_io_exception_type.*.*.*"
-   name: "fix_did_external_io_exception_type"
-   labels:
-      service_name: "$1"
-      service_address: "$2"
-      exception_class: "$3"
-
- - match: "fix_did_function_duration_ms.*.*.*"
-   timer_type: histogram
-   name: "fix_did_function_duration_ms"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "fix_did_function_duration_ms_total.*.*.*"
-   name: "fix_did_function_duration_ms_total"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      status: "$3"
-
- - match: "fix_did_function_exception_type.*.*.*"
-   name: "fix_did_function_exception_type"
-   labels:
-      function_name: "$1"
-      host: "$2"
-      exception_class: "$3"
+       app_name: "$1"
