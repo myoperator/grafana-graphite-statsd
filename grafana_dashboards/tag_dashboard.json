@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586322688414,
+  "iteration": 1586322688430,
   "links": [],
   "panels": [
     {
@@ -60,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(external_io_exception_type{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (service_name)(rate(external_io_exception_type{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -148,7 +148,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_exception_type{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum(rate(http_requests_exception_type{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -236,7 +236,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (service_name)(rate(external_io_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (service_name)(rate(external_io_duration_ms_count{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -325,7 +325,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_total{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum(rate(http_requests_total{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -414,7 +414,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (app_name, service_name, status)(rate(external_io_duration_ms_sum{app_name=\"[[apps]]\"}[2m]))\n /\nsum by (app_name, service_name, status)(rate(external_io_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (app_name, service_name, status)(rate(external_io_duration_ms_sum{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))\n /\nsum by (app_name, service_name, status)(rate(external_io_duration_ms_count{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -503,7 +503,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_duration_ms_sum{app_name=\"[[apps]]\"}[2m]))\n /\nsum(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum(rate(http_requests_duration_ms_sum{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))\n /\nsum(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -592,7 +592,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, status_code)(rate(http_requests_duration_ms_sum{app_name=\"[[apps]]\"}[2m]))\n /\nsum by (entry_point, status_code)(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (entry_point, status_code)(rate(http_requests_duration_ms_sum{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))\n /\nsum by (entry_point, status_code)(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "instant": false,
           "refId": "A"
         }
@@ -681,7 +681,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(http_requests_duration_ms_bucket{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (le)(rate(http_requests_duration_ms_bucket{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -773,7 +773,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, status_code)(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (entry_point, status_code)(rate(http_requests_duration_ms_count{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -859,7 +859,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (le)(rate(external_io_duration_ms_bucket{app_name=\"[[apps]]\"}[2m]))",
+          "expr": "sum by (le)(rate(external_io_duration_ms_bucket{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}[2m]))",
           "refId": "A"
         }
       ],
@@ -946,7 +946,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "http_requests_duration_ms_total{app_name=\"[[apps]]\"}",
+          "expr": "http_requests_duration_ms_total{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}",
           "refId": "A"
         }
       ],
@@ -1130,7 +1130,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "bytes_size{app_name=\"[[apps]]\"}",
+          "expr": "bytes_size{app_name=\"[[apps]]\", server_ip=\"[[server]]\", entry_point=\"[[entry_point]]\"}",
           "refId": "A"
         }
       ],
@@ -1213,6 +1213,85 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "127.0.1.1",
+          "value": "127.0.1.1"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(server_ip)",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "server",
+        "options": [
+          {
+            "selected": true,
+            "text": "127.0.1.1",
+            "value": "127.0.1.1"
+          }
+        ],
+        "query": "label_values(server_ip)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "/obd/channel-check",
+          "value": "/obd/channel-check"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(entry_point)",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "entry_point",
+        "options": [
+          {
+            "selected": true,
+            "text": "/obd/channel-check",
+            "value": "/obd/channel-check"
+          },
+          {
+            "selected": false,
+            "text": "/obd/ivr-rules",
+            "value": "/obd/ivr-rules"
+          },
+          {
+            "selected": false,
+            "text": "ValueError",
+            "value": "ValueError"
+          },
+          {
+            "selected": false,
+            "text": "test/path",
+            "value": "test/path"
+          }
+        ],
+        "query": "label_values(entry_point)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -1236,5 +1315,6 @@
   },
   "timezone": "",
   "title": "APM Tagged Dashboard",
-  "uid": "WJS73v1az",
+  "uid": "WJS73veZ1",
   "version": 1
+}
