@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586322688430,
+  "iteration": 1586430839947,
   "links": [],
   "panels": [
     {
@@ -1177,7 +1177,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1185,9 +1185,8 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "obd_wrapper",
-          "value": "obd_wrapper"
+          "text": "engine_api",
+          "value": "engine_api"
         },
         "datasource": "Prometheus",
         "definition": "label_values(app_name)",
@@ -1196,15 +1195,9 @@
         "label": null,
         "multi": false,
         "name": "apps",
-        "options": [
-          {
-            "selected": true,
-            "text": "obd_wrapper",
-            "value": "obd_wrapper"
-          }
-        ],
+        "options": [],
         "query": "label_values(app_name)",
-        "refresh": 0,
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1217,9 +1210,8 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "127.0.1.1",
-          "value": "127.0.1.1"
+          "text": "10.0.0.101",
+          "value": "10.0.0.101"
         },
         "datasource": "Prometheus",
         "definition": "label_values(server_ip)",
@@ -1228,15 +1220,9 @@
         "label": null,
         "multi": false,
         "name": "server",
-        "options": [
-          {
-            "selected": true,
-            "text": "127.0.1.1",
-            "value": "127.0.1.1"
-          }
-        ],
+        "options": [],
         "query": "label_values(server_ip)",
-        "refresh": 0,
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1249,9 +1235,8 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "/obd/channel-check",
-          "value": "/obd/channel-check"
+          "text": "/engine/callback/lastcall",
+          "value": "/engine/callback/lastcall"
         },
         "datasource": "Prometheus",
         "definition": "label_values(entry_point)",
@@ -1260,30 +1245,9 @@
         "label": null,
         "multi": false,
         "name": "entry_point",
-        "options": [
-          {
-            "selected": true,
-            "text": "/obd/channel-check",
-            "value": "/obd/channel-check"
-          },
-          {
-            "selected": false,
-            "text": "/obd/ivr-rules",
-            "value": "/obd/ivr-rules"
-          },
-          {
-            "selected": false,
-            "text": "ValueError",
-            "value": "ValueError"
-          },
-          {
-            "selected": false,
-            "text": "test/path",
-            "value": "test/path"
-          }
-        ],
+        "options": [],
         "query": "label_values(entry_point)",
-        "refresh": 0,
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1296,7 +1260,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
