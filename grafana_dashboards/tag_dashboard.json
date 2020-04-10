@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586442517115,
+  "iteration": 1586495524770,
   "links": [],
   "panels": [
     {
@@ -1308,8 +1308,10 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "obd_wrapper",
-          "value": "obd_wrapper"
+          "text": "callback_api",
+          "value": [
+            "callback_api"
+          ]
         },
         "datasource": "Prometheus",
         "definition": "label_values(app_name)",
@@ -1333,18 +1335,22 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "127.0.1.1",
-          "value": "127.0.1.1"
+          "selected": false,
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": "Prometheus",
-        "definition": "label_values(server_ip)",
+        "definition": "label_values({app_name=~\"$app_name\"}, server_ip)",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "server",
         "options": [],
-        "query": "label_values(server_ip)",
+        "query": "label_values({app_name=~\"$app_name\"}, server_ip)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1364,14 +1370,14 @@
           ]
         },
         "datasource": "Prometheus",
-        "definition": "label_values(entry_point)",
+        "definition": "label_values({app_name=~\"$app_name\", server_ip=~\"$server\"}, entry_point)",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "entry_point",
         "options": [],
-        "query": "label_values(entry_point)",
+        "query": "label_values({app_name=~\"$app_name\", server_ip=~\"$server\"}, entry_point)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1385,7 +1391,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -1405,5 +1411,5 @@
   "timezone": "",
   "title": "Tagged APM dashboatrd",
   "uid": "WJS73vuZztag",
-  "version": 4
+  "version": 6
 }
