@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586495524770,
+  "iteration": 1586853733302,
   "links": [],
   "panels": [
     {
@@ -39,18 +39,20 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
@@ -58,7 +60,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(external_io_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -92,18 +94,20 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
@@ -111,7 +115,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(http_requests_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -528,7 +532,7 @@
         {
           "expr": "sum(rate(http_requests_total{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
           "interval": "",
-          "legendFormat": "$app_name - $server",
+          "legendFormat": "Requests Per Second",
           "refId": "A"
         }
       ],
@@ -707,7 +711,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, status_code)(irate(http_requests_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n /\nsum by (entry_point, status_code)(irate(http_requests_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "expr": "sum by (entry_point, status_code)(rate(http_requests_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n /\nsum by (entry_point, status_code)(rate(http_requests_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
           "instant": false,
           "legendFormat": "{{entry_point}}---{{status_code}}",
           "refId": "A"
@@ -1207,7 +1211,7 @@
       "dashes": false,
       "datasource": "Prometheus",
       "fill": 1,
-      "fillGradient": 9,
+      "fillGradient": 1,
       "gridPos": {
         "h": 8,
         "w": 12,
@@ -1242,9 +1246,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(http_requests_duration_ms_bucket{le=\"0.5\", app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n/\n  sum(rate(http_requests_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "expr": "sum by (entry_point)(rate(http_requests_duration_ms_bucket{le=\"$slo_duration_sec\", app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n/\n  sum by (entry_point)(rate(http_requests_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
           "interval": "",
-          "legendFormat": "Requests Ratio for SLO",
+          "legendFormat": "SLO for {{entry_point}}",
           "refId": "A"
         }
       ],
@@ -1300,7 +1304,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1308,9 +1312,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "callback_api",
+          "text": "All",
           "value": [
-            "callback_api"
+            "$__all"
           ]
         },
         "datasource": "Prometheus",
@@ -1335,8 +1339,6 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "tags": [],
           "text": "All",
           "value": [
             "$__all"
@@ -1387,11 +1389,368 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "0.05",
+          "value": "0.05"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(le)",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "slo_duration_sec",
+        "options": [
+          {
+            "selected": false,
+            "text": "+Inf",
+            "value": "+Inf"
+          },
+          {
+            "selected": false,
+            "text": "0.005",
+            "value": "0.005"
+          },
+          {
+            "selected": false,
+            "text": "0.01",
+            "value": "0.01"
+          },
+          {
+            "selected": false,
+            "text": "0.025",
+            "value": "0.025"
+          },
+          {
+            "selected": true,
+            "text": "0.05",
+            "value": "0.05"
+          },
+          {
+            "selected": false,
+            "text": "0.1",
+            "value": "0.1"
+          },
+          {
+            "selected": false,
+            "text": "0.2",
+            "value": "0.2"
+          },
+          {
+            "selected": false,
+            "text": "0.25",
+            "value": "0.25"
+          },
+          {
+            "selected": false,
+            "text": "0.4",
+            "value": "0.4"
+          },
+          {
+            "selected": false,
+            "text": "0.5",
+            "value": "0.5"
+          },
+          {
+            "selected": false,
+            "text": "1",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "1.6384e+06",
+            "value": "1.6384e+06"
+          },
+          {
+            "selected": false,
+            "text": "10",
+            "value": "10"
+          },
+          {
+            "selected": false,
+            "text": "100",
+            "value": "100"
+          },
+          {
+            "selected": false,
+            "text": "1000",
+            "value": "1000"
+          },
+          {
+            "selected": false,
+            "text": "10000",
+            "value": "10000"
+          },
+          {
+            "selected": false,
+            "text": "100000",
+            "value": "100000"
+          },
+          {
+            "selected": false,
+            "text": "102.515625",
+            "value": "102.515625"
+          },
+          {
+            "selected": false,
+            "text": "102400",
+            "value": "102400"
+          },
+          {
+            "selected": false,
+            "text": "108",
+            "value": "108"
+          },
+          {
+            "selected": false,
+            "text": "120",
+            "value": "120"
+          },
+          {
+            "selected": false,
+            "text": "1230.1875",
+            "value": "1230.1875"
+          },
+          {
+            "selected": false,
+            "text": "128",
+            "value": "128"
+          },
+          {
+            "selected": false,
+            "text": "13.5",
+            "value": "13.5"
+          },
+          {
+            "selected": false,
+            "text": "153.7734375",
+            "value": "153.7734375"
+          },
+          {
+            "selected": false,
+            "text": "16",
+            "value": "16"
+          },
+          {
+            "selected": false,
+            "text": "1600",
+            "value": "1600"
+          },
+          {
+            "selected": false,
+            "text": "162",
+            "value": "162"
+          },
+          {
+            "selected": false,
+            "text": "1845.28125",
+            "value": "1845.28125"
+          },
+          {
+            "selected": false,
+            "text": "1e+06",
+            "value": "1e+06"
+          },
+          {
+            "selected": false,
+            "text": "1e+07",
+            "value": "1e+07"
+          },
+          {
+            "selected": false,
+            "text": "1e+08",
+            "value": "1e+08"
+          },
+          {
+            "selected": false,
+            "text": "1e+09",
+            "value": "1e+09"
+          },
+          {
+            "selected": false,
+            "text": "2",
+            "value": "2"
+          },
+          {
+            "selected": false,
+            "text": "2.5",
+            "value": "2.5"
+          },
+          {
+            "selected": false,
+            "text": "2.62144e+07",
+            "value": "2.62144e+07"
+          },
+          {
+            "selected": false,
+            "text": "20",
+            "value": "20"
+          },
+          {
+            "selected": false,
+            "text": "20.25",
+            "value": "20.25"
+          },
+          {
+            "selected": false,
+            "text": "230.66015625",
+            "value": "230.66015625"
+          },
+          {
+            "selected": false,
+            "text": "243",
+            "value": "243"
+          },
+          {
+            "selected": false,
+            "text": "256",
+            "value": "256"
+          },
+          {
+            "selected": false,
+            "text": "25600",
+            "value": "25600"
+          },
+          {
+            "selected": false,
+            "text": "2767.921875",
+            "value": "2767.921875"
+          },
+          {
+            "selected": false,
+            "text": "3",
+            "value": "3"
+          },
+          {
+            "selected": false,
+            "text": "30.375",
+            "value": "30.375"
+          },
+          {
+            "selected": false,
+            "text": "32",
+            "value": "32"
+          },
+          {
+            "selected": false,
+            "text": "345.990234375",
+            "value": "345.990234375"
+          },
+          {
+            "selected": false,
+            "text": "364.5",
+            "value": "364.5"
+          },
+          {
+            "selected": false,
+            "text": "4",
+            "value": "4"
+          },
+          {
+            "selected": false,
+            "text": "400",
+            "value": "400"
+          },
+          {
+            "selected": false,
+            "text": "409600",
+            "value": "409600"
+          },
+          {
+            "selected": false,
+            "text": "45.5625",
+            "value": "45.5625"
+          },
+          {
+            "selected": false,
+            "text": "48",
+            "value": "48"
+          },
+          {
+            "selected": false,
+            "text": "5",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "512",
+            "value": "512"
+          },
+          {
+            "selected": false,
+            "text": "546.75",
+            "value": "546.75"
+          },
+          {
+            "selected": false,
+            "text": "6",
+            "value": "6"
+          },
+          {
+            "selected": false,
+            "text": "6.5536e+06",
+            "value": "6.5536e+06"
+          },
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": false,
+            "text": "64",
+            "value": "64"
+          },
+          {
+            "selected": false,
+            "text": "6400",
+            "value": "6400"
+          },
+          {
+            "selected": false,
+            "text": "68.34375",
+            "value": "68.34375"
+          },
+          {
+            "selected": false,
+            "text": "72",
+            "value": "72"
+          },
+          {
+            "selected": false,
+            "text": "8",
+            "value": "8"
+          },
+          {
+            "selected": false,
+            "text": "820.125",
+            "value": "820.125"
+          },
+          {
+            "selected": false,
+            "text": "9",
+            "value": "9"
+          }
+        ],
+        "query": "label_values(le)",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-2d",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1411,5 +1770,5 @@
   "timezone": "",
   "title": "Tagged APM dashboatrd",
   "uid": "WJS73vuZztag",
-  "version": 6
+  "version": 2
 }
