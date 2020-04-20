@@ -1,11 +1,11 @@
 groups:
-- name: login-app
+- name: HighRequestLatency
   rules:
-  - alert: high_login
-    expr: userlogin_events_total > 5
-    for: 30s
+  - alert: high_latency
+    expr: sum(rate(http_requests_duration_ms_bucket{le="0.25"}[10s])) / sum(rate(http_requests_duration_ms_count[10s])) < 0.90
+    for: 5s
     labels:
       severity: warning
     annotations:
-      summary: "Server under high load"
-      description: "Docker host is under high load, the avg load 1m is at {{ $value}}. Reported by instance {{ $labels.instance }} of job {{ $labels.job }}."
+      summary: "Server "
+      description: "Latency is high"
