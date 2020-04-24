@@ -2,10 +2,10 @@ groups:
 - name: HighRequestLatency
   rules:
   - alert: high_latency
-    expr: sum(rate(http_requests_duration_ms_bucket{le="0.25"}[10s])) / sum(rate(http_requests_duration_ms_count[10s])) < 0.90
+    expr: sum(rate(http_requests_duration_ms_bucket{le="0.25", app_name='engine_api'}[10s])) / sum(rate(http_requests_duration_ms_count{app_name='engine_api'}[10s])) < 0.50
     for: 5s
     labels:
       severity: warning
     annotations:
-      summary: "Server "
-      description: "Latency is high"
+      summary: "OBD Wrapper API Latency is high"
+      description: "Requests with response time > 250ms has exceeded 50%."
