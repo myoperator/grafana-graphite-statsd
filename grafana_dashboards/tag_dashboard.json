@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1586853733302,
+  "iteration": 1587987195325,
   "links": [],
   "panels": [
     {
@@ -39,20 +39,18 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
+          "override": {},
           "overrides": [],
           "values": false
         },
@@ -60,7 +58,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.6.2",
+      "pluginVersion": "6.5.3",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(external_io_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -94,20 +92,18 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
+          "override": {},
           "overrides": [],
           "values": false
         },
@@ -115,7 +111,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.6.2",
+      "pluginVersion": "6.5.3",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(http_requests_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -172,8 +168,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, name)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
-          "legendFormat": "{{entry_point}}----{{name}}",
+          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "legendFormat": "{{entry_point}}----{{name}}--{{tag}}}}",
           "refId": "A"
         }
       ],
@@ -440,8 +436,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, name, status)(rate(external_io_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n /\nsum by (entry_point, name, status)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
-          "legendFormat": "{{entry_point}}---{{name}}",
+          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n /\nsum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "legendFormat": "{{entry_point}} -- {{name}} -- {{tag}}",
           "refId": "A"
         }
       ],
@@ -1304,7 +1300,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 22,
+  "schemaVersion": 21,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1750,7 +1746,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1770,5 +1766,5 @@
   "timezone": "",
   "title": "Tagged APM dashboatrd",
   "uid": "WJS73vuZztag",
-  "version": 2
+  "version": 8
 }
