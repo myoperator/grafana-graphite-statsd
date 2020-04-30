@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1587987195325,
+  "id": 13,
+  "iteration": 1588237990655,
   "links": [],
   "panels": [
     {
@@ -39,18 +40,20 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
@@ -58,7 +61,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(external_io_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -92,18 +95,20 @@
             "mappings": [],
             "max": 100,
             "min": 0,
-            "thresholds": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
           },
-          "override": {},
           "overrides": [],
           "values": false
         },
@@ -111,7 +116,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.5.3",
+      "pluginVersion": "6.6.2",
       "targets": [
         {
           "expr": "sum by (service_name)(rate(http_requests_exception_type{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
@@ -168,7 +173,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\", tag=~ \"$io_tag\"}[2m]))",
           "legendFormat": "{{entry_point}}----{{name}}--{{tag}}}}",
           "refId": "A"
         }
@@ -436,7 +441,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))\n /\nsum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\"}[2m]))",
+          "expr": "sum by (entry_point, name, tag)(rate(external_io_duration_ms_sum{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\", tag=~\"$io_tag\"}[2m]))\n /\nsum by (entry_point, name, tag)(rate(external_io_duration_ms_count{app_name=~\"$app_name\", server_ip=~\"$server\", entry_point=~\"$entry_point\", tag=~\"$io_tag\"}[2m]))",
           "legendFormat": "{{entry_point}} -- {{name}} -- {{tag}}",
           "refId": "A"
         }
@@ -1300,7 +1305,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 21,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1742,6 +1747,33 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(tag)",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "io_tag",
+        "options": [],
+        "query": "label_values(tag)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -1764,7 +1796,7 @@
     ]
   },
   "timezone": "",
-  "title": "Tagged APM dashboatrd",
-  "uid": "WJS73vuZztag",
-  "version": 8
+  "title": "Tagged APM dashboatrd 1",
+  "uid": "WJS73vuZztaa",
+  "version": 3
 }
