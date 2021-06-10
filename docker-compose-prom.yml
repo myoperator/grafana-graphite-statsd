@@ -7,7 +7,7 @@ services:
       - 9102:9102
       - 9125:9125
       - 9125:9125/udp
-    command: --statsd.mapping-config=/tmp/statsd_mapping.yml --log.level="debug" --log.format="logger:stdout?json=true"
+    command: --statsd.mapping-config=/tmp/statsd_mapping.yml --log.level="debug" --log.format="json"
     volumes: 
       - ./statsd/statsd_mapping.yml:/tmp/statsd_mapping.yml
   
